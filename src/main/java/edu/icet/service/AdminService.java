@@ -10,4 +10,6 @@ public interface AdminService {
     List<Car>getAllCars();
 
     void deleteCar(Long id);
+
+    Car getCarById(Long id);
 }

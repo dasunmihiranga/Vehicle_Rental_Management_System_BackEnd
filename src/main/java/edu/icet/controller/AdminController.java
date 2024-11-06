@@ -16,7 +16,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @PostMapping("/car")
+    @PostMapping("/vehicle")
     public ResponseEntity<?>postCar(@ModelAttribute Car car){
         System.out.println(car);
         boolean success=adminService.postCar(car);
@@ -28,14 +28,19 @@ public class AdminController {
         }
 
     }
-    @GetMapping("/cars")
+    @GetMapping("/vehicles")
     public ResponseEntity<?>getAllCars(){
         return ResponseEntity.ok(adminService.getAllCars());
     }
-    @DeleteMapping("/car/{id}")
+    @DeleteMapping("/vehicle/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable Long id){
         adminService.deleteCar(id);
         return ResponseEntity.ok(null);
+    }
+    @GetMapping("/vehicle/{id}")
+    public ResponseEntity<Car>getCarById(@PathVariable Long id){
+        Car car =adminService.getCarById(id);
+        return ResponseEntity.ok(car);
     }
 
 

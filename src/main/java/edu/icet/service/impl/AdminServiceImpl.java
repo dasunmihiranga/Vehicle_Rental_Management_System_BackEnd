@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,5 +47,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteCar(Long id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public Car getCarById(Long id) {
+        Optional<CarEntity> optionalCar = carRepository.findById(id);
+        return optionalCar.map(CarEntity::getCar).orElse(null);
     }
 }
