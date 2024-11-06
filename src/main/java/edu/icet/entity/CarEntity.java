@@ -1,6 +1,7 @@
 package edu.icet.entity;
 
 
+import edu.icet.dto.Car;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,4 +34,20 @@ public class CarEntity {
 
     @Column(columnDefinition = "longblob")
     private byte[] image;
+
+    public Car getCar(){
+        Car car =new Car();
+        car.setId(id);
+        car.setName(name);
+        car.setBrand(brand);
+        car.setColour(colour);
+        car.setPrice(price);
+        car.setDescription(description);
+        car.setType(type);
+        car.setTransmission(transmission);
+        car.setYear(year);
+        car.setReturnedImage(image);
+
+        return car;
+    }
 }

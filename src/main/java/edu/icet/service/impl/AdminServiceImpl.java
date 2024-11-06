@@ -9,6 +9,9 @@ import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 
@@ -33,5 +36,15 @@ public class AdminServiceImpl implements AdminService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public List<Car> getAllCars() {
+        return carRepository.findAll().stream().map(CarEntity::getCar).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCar(Long id) {
+        carRepository.deleteById(id);
     }
 }

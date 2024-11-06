@@ -1,5 +1,6 @@
 package edu.icet.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
@@ -7,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Date;
 @Data
 @ToString
+
+
 public class Car {
     private long id;
 
@@ -29,4 +32,6 @@ public class Car {
     private MultipartFile image;
 
     private byte[] returnedImage;
+
+
 }

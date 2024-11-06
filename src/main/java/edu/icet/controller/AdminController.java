@@ -20,7 +20,7 @@ public class AdminController {
     public ResponseEntity<?>postCar(@ModelAttribute Car car){
         System.out.println(car);
         boolean success=adminService.postCar(car);
-        System.out.println("kela una"+success);
+        System.out.println(success);
         if (success){
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }else {
@@ -28,5 +28,15 @@ public class AdminController {
         }
 
     }
+    @GetMapping("/cars")
+    public ResponseEntity<?>getAllCars(){
+        return ResponseEntity.ok(adminService.getAllCars());
+    }
+    @DeleteMapping("/car/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id){
+        adminService.deleteCar(id);
+        return ResponseEntity.ok(null);
+    }
+
 
 }
