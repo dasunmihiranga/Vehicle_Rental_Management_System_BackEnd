@@ -2,6 +2,7 @@ package edu.icet.service;
 
 import edu.icet.dto.Car;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AdminService {
@@ -12,4 +13,6 @@ public interface AdminService {
     void deleteCar(Long id);
 
     Car getCarById(Long id);
+
+    boolean updateCar(Long carId,Car car) throws IOException;
 }
