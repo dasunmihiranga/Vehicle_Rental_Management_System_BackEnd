@@ -14,5 +14,7 @@ public class BookACar {
     private BookCarStatus bookCarStatus;
     private Long userId;
     private Long carId;
+    private String username;
+    private String email;
 
 }

@@ -1,6 +1,7 @@
 package edu.icet.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.icet.dto.BookACar;
 import edu.icet.util.BookCarStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,6 +33,21 @@ public class BookACarEntity {
     @JsonIgnore
     private CarEntity car;
 
+    public BookACar getBookACar(){
+        BookACar bookACar=new BookACar();
+        bookACar.setId(id);
+        bookACar.setDays(days);
+        bookACar.setBookCarStatus(bookCarStatus);
+        bookACar.setPrice(price);
+        bookACar.setToDate(toDate);
+        bookACar.setFromDate(fromDate);
+        bookACar.setUsername(user.getName());
+        bookACar.setUserId(user.getId());
+        bookACar.setCarId(car.getId());
+
+
+        return bookACar;
+    }
 
 
 }
