@@ -1,13 +1,12 @@
 package edu.icet.controller;
 
+import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
 import edu.icet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +21,18 @@ public class CustomerController {
     public ResponseEntity<List<Car>> getAllCars(){
         List<Car>carList =customerService.getAllCars();
         return ResponseEntity.ok(carList);
+    }
+
+    @PostMapping("/car/book")
+    public ResponseEntity<Void>bookACar(@RequestBody BookACar bookACar){
+        boolean success = customerService.bookACar(bookACar);
+        if (success)return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+    @GetMapping("/car/{carId}")
+    public ResponseEntity<Car> getCarById(@PathVariable Long carId){
+        Car car = customerService.getCarById(carId);
+        if (car==null)return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(car);
     }
 }
