@@ -25,6 +25,7 @@ public class CustomerController {
 
     @PostMapping("/car/book")
     public ResponseEntity<Void>bookACar(@RequestBody BookACar bookACar){
+        System.out.println(bookACar);
         boolean success = customerService.bookACar(bookACar);
         if (success)return ResponseEntity.status(HttpStatus.CREATED).build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
