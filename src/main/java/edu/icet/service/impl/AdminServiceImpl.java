@@ -8,11 +8,13 @@ import edu.icet.entity.CarEntity;
 import edu.icet.repository.BookACarRepository;
 import edu.icet.repository.CarRepository;
 import edu.icet.service.AdminService;
+import edu.icet.util.BookCarStatus;
 import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -85,5 +87,23 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<BookACar> getBookings() {
         return bookACarRepository.findAll().stream().map(BookACarEntity::getBookACar).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean changeBookingStatus(Long bookingId, String status) {
+        System.out.println(bookingId+"  "+status);
+        Optional<BookACarEntity>optionalBookACarEntity =bookACarRepository.findById(bookingId);
+        if (optionalBookACarEntity.isPresent()){
+            BookACarEntity existingBookACar = optionalBookACarEntity.get();
+            if (status.equals("Approve")){
+                existingBookACar.setBookCarStatus(BookCarStatus.APPROVED);
+            }else if (status.equals("Rejects")){
+                existingBookACar.setBookCarStatus(BookCarStatus.REJECTED);
+
+            }
+            bookACarRepository.save(existingBookACar);
+            return true;
+        }
+        return false;
     }
 }
