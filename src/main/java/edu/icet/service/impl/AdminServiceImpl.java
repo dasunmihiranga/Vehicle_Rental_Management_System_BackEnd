@@ -1,8 +1,11 @@
 package edu.icet.service.impl;
 
 
+import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
+import edu.icet.entity.BookACarEntity;
 import edu.icet.entity.CarEntity;
+import edu.icet.repository.BookACarRepository;
 import edu.icet.repository.CarRepository;
 import edu.icet.service.AdminService;
 import io.jsonwebtoken.io.IOException;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 
 public class AdminServiceImpl implements AdminService {
     private final CarRepository carRepository;
+    private final BookACarRepository bookACarRepository;
 
     @Override
     public boolean postCar(Car car) throws IOException {
@@ -76,5 +80,10 @@ public class AdminServiceImpl implements AdminService {
         }
         return false;
 
+    }
+
+    @Override
+    public List<BookACar> getBookings() {
+        return bookACarRepository.findAll().stream().map(BookACarEntity::getBookACar).collect(Collectors.toList());
     }
 }

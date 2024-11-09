@@ -41,6 +41,7 @@ public class BookACarEntity {
         bookACar.setPrice(price);
         bookACar.setToDate(toDate);
         bookACar.setFromDate(fromDate);
+        bookACar.setEmail(user.getEmail());
         bookACar.setUsername(user.getName());
         bookACar.setUserId(user.getId());
         bookACar.setCarId(car.getId());

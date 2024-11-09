@@ -1,5 +1,6 @@
 package edu.icet.controller;
 
+import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
 import edu.icet.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -54,6 +56,11 @@ public class AdminController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+    @GetMapping("/car/bookings")
+    public  ResponseEntity<List<BookACar>> getBookings(){
+        return ResponseEntity.ok(adminService.getBookings());
+
     }
 
 

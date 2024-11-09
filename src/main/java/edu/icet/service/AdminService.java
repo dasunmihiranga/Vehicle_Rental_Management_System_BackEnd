@@ -1,5 +1,6 @@
 package edu.icet.service;
 
+import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
 
 import java.io.IOException;
@@ -15,4 +16,6 @@ public interface AdminService {
     Car getCarById(Long id);
 
     boolean updateCar(Long carId,Car car) throws IOException;
+
+    List<BookACar>getBookings();
 }

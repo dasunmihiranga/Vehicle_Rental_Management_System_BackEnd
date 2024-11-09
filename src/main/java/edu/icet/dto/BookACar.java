@@ -2,9 +2,11 @@ package edu.icet.dto;
 
 import edu.icet.util.BookCarStatus;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 @Data
+@ToString
 public class BookACar {
     private Long id;
     private Date fromDate;
