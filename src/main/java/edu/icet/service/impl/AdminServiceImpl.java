@@ -101,7 +101,7 @@ public class AdminServiceImpl implements AdminService {
             BookACarEntity existingBookACar = optionalBookACarEntity.get();
             if (status.equals("Approve")){
                 existingBookACar.setBookCarStatus(BookCarStatus.APPROVED);
-            }else if (status.equals("Rejects")){
+            }else if (status.equals("Reject")){
                 existingBookACar.setBookCarStatus(BookCarStatus.REJECTED);
 
             }
