@@ -2,6 +2,7 @@ package edu.icet.controller;
 
 import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
+import edu.icet.dto.SearchCar;
 import edu.icet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,5 +41,10 @@ public class CustomerController {
     @GetMapping("/car/booking/{userId}")
     public ResponseEntity<List<BookACar>> getBookingByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(customerService.getBookingByUserId(userId));
+    }
+
+    @PostMapping("/car/search")
+    public ResponseEntity<?> searchCar(@RequestBody SearchCar searchCar){
+        return ResponseEntity.ok(customerService.searchCar(searchCar));
     }
 }

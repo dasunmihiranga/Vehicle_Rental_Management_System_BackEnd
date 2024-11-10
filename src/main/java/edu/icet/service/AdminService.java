@@ -2,6 +2,8 @@ package edu.icet.service;
 
 import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
+import edu.icet.dto.CarList;
+import edu.icet.dto.SearchCar;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,4 +22,6 @@ public interface AdminService {
     List<BookACar>getBookings();
 
     boolean changeBookingStatus(Long bookingId,String status);
+
+    CarList searchCar(SearchCar searchCar);
 }

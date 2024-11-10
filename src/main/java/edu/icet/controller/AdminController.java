@@ -2,6 +2,7 @@ package edu.icet.controller;
 
 import edu.icet.dto.BookACar;
 import edu.icet.dto.Car;
+import edu.icet.dto.SearchCar;
 import edu.icet.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,10 @@ public class AdminController {
         boolean success = adminService.changeBookingStatus(bookingId,status);
         if (success) return  ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
+    }
+    @PostMapping("/car/search")
+    public ResponseEntity<?> searchCar(@RequestBody SearchCar searchCar){
+        return ResponseEntity.ok(adminService.searchCar(searchCar));
     }
 
 
