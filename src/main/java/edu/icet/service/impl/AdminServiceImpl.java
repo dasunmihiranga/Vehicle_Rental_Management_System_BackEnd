@@ -7,11 +7,14 @@ import edu.icet.dto.CarList;
 import edu.icet.dto.SearchCar;
 import edu.icet.entity.BookACarEntity;
 import edu.icet.entity.CarEntity;
+import edu.icet.entity.UserEntity;
 import edu.icet.repository.BookACarRepository;
 import edu.icet.repository.CarRepository;
 import edu.icet.service.AdminService;
+import edu.icet.service.EmailService;
 import edu.icet.util.BookCarStatus;
 import io.jsonwebtoken.io.IOException;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 public class AdminServiceImpl implements AdminService {
     private final CarRepository carRepository;
     private final BookACarRepository bookACarRepository;
+    private final EmailService emailService;
 
     @Override
     public boolean postCar(Car car) throws IOException {
@@ -99,12 +103,25 @@ public class AdminServiceImpl implements AdminService {
         Optional<BookACarEntity>optionalBookACarEntity =bookACarRepository.findById(bookingId);
         if (optionalBookACarEntity.isPresent()){
             BookACarEntity existingBookACar = optionalBookACarEntity.get();
+            UserEntity user = existingBookACar.getUser();
+
             if (status.equals("Approve")){
+                try {
+                    emailService.sendBookingResponseEmail(user.getEmail(),user.getName(),"Approved");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
                 existingBookACar.setBookCarStatus(BookCarStatus.APPROVED);
             }else if (status.equals("Reject")){
+                try {
+                    emailService.sendBookingResponseEmail(user.getEmail(),user.getName(),"Rejected");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
                 existingBookACar.setBookCarStatus(BookCarStatus.REJECTED);
 
             }
+
             bookACarRepository.save(existingBookACar);
             return true;
         }
