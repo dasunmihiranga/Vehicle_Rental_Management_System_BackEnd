@@ -23,15 +23,12 @@ public class AdminController {
 
     @PostMapping("/car")
     public ResponseEntity<?>postCar(@ModelAttribute Car car){
-        System.out.println(car);
         boolean success=adminService.postCar(car);
-        System.out.println(success);
         if (success){
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
     }
     @GetMapping("/cars")
     public ResponseEntity<?>getAllCars(){
@@ -49,7 +46,6 @@ public class AdminController {
     }
     @PutMapping("/car/{carId}")
     public ResponseEntity<Void> updateCar(@PathVariable Long carId,@ModelAttribute Car car) throws IOException {
-
         try{
             boolean success=adminService.updateCar(carId,car);
             if (success) return  ResponseEntity.status(HttpStatus.OK).build();

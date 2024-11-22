@@ -104,7 +104,6 @@ public class AdminServiceImpl implements AdminService {
         if (optionalBookACarEntity.isPresent()){
             BookACarEntity existingBookACar = optionalBookACarEntity.get();
             UserEntity user = existingBookACar.getUser();
-
             if (status.equals("Approve")){
                 try {
                     emailService.sendBookingResponseEmail(user.getEmail(),user.getName(),"Approved");
@@ -121,7 +120,6 @@ public class AdminServiceImpl implements AdminService {
                 existingBookACar.setBookCarStatus(BookCarStatus.REJECTED);
 
             }
-
             bookACarRepository.save(existingBookACar);
             return true;
         }
@@ -130,7 +128,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CarList searchCar(SearchCar searchCar) {
-        System.out.println("Searching for car with criteria: " + searchCar);
 
         CarEntity carEntity = new CarEntity();
 
@@ -152,7 +149,7 @@ public class AdminServiceImpl implements AdminService {
 
         CarList carList = new CarList();
         carList.setCarList(carEntityList.stream()
-                .map(CarEntity::getCar) // Ensure getCar returns a Car instance
+                .map(CarEntity::getCar)
                 .collect(Collectors.toList()));
         return carList;
     }
